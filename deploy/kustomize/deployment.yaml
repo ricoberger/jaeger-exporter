@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jaeger-exporter
+  labels:
+    helm.sh/chart: jaeger-exporter-0.1.0
+    app.kubernetes.io/name: jaeger-exporter
+    app.kubernetes.io/instance: jaeger-exporter
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: jaeger-exporter
+      app.kubernetes.io/instance: jaeger-exporter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: jaeger-exporter
+        app.kubernetes.io/instance: jaeger-exporter
+    spec:
+      containers:
+        - name: jaeger-exporter
+          image: "ricoberger/jaeger-exporter:v0.1.0"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
