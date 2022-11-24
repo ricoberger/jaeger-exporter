@@ -19,7 +19,6 @@ image:
   pullPolicy: IfNotPresent
   tag: v0.2.0
 
-
 ## Specify additional annotations for the created Pods.
 ##
 podAnnotations: {}
@@ -36,6 +35,12 @@ args: []
   # - --kafka.consumer.topic=jaeger-spans
   # - --log.format=json
   # - --log.level=debug
+
+## Specify podDisruptionBudget settings for the jaeger-exporter.
+## See: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
+##
+podDisruptionBudget: {}
+  # maxUnavailable: 1
 
 ## Specify security settings for the created Pods. To set the security settings for the jaeger-exporter Container use
 ## the corresponding "securityContext" field.
@@ -69,6 +74,23 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+## Specify a map of key-value pairs, to configure livenessProbe.
+## See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+##
+livenessProbe:
+  failureThreshold: 10
+  httpGet:
+    path: /health
+    port: http
+
+## Specify a map of key-value pairs, to configure readinessProbe.
+## See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+##
+readinessProbe:
+  failureThreshold: 3
+  httpGet:
+    path: /health
+    port: http
 
 ## Specify a map of key-value pairs, to assign the Pods to a specific set of nodes.
 ## See: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#nodeselector
