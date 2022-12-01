@@ -1,0 +1,13 @@
+{{- if .Values.podDisruptionBudget -}}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "jaeger-exporter.fullname" . }}
+  labels:
+    {{- include "jaeger-exporter.labels" . | nindent 4 }}
+spec:
+  {{- toYaml .Values.podDisruptionBudget | nindent 2}}
+  selector:
+    matchLabels:
+      {{- include "jaeger-exporter.selectorLabels" . | nindent 6 }}
+{{- end -}}
