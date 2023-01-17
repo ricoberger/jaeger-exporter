@@ -4,11 +4,8 @@ kind: Service
 metadata:
   name: jaeger-exporter
   labels:
-    helm.sh/chart: jaeger-exporter-0.1.0
     app.kubernetes.io/name: jaeger-exporter
     app.kubernetes.io/instance: jaeger-exporter
-    app.kubernetes.io/version: "0.1.0"
-    app.kubernetes.io/managed-by: Helm
 spec:
   type: ClusterIP
   ports:
