@@ -24,9 +24,9 @@ jobs:
         run: |
           go mod download
 
-      # - name: Vet
-      #   run: |
-      #     go vet ./...
+      - name: Vet
+        run: |
+          go vet ./...
 
       - name: Test
         run: |

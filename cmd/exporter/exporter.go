@@ -124,7 +124,7 @@ func main() {
 	// Create a new consumer, which consumes spans from Kafka and passes the spans to our exporter client, which then
 	// creates the metrics for the service performance monitoring.
 	options := app.Options{
-		kafkaConsumer.Configuration{
+		Configuration: kafkaConsumer.Configuration{
 			// kafkaAuth.AuthenticationConfig{
 			// 	Authentication: kafkaConsumerAuthentication,
 			// 	Kerberos: kafkaAuth.KerberosConfig{
@@ -157,9 +157,9 @@ func main() {
 			ProtocolVersion: kafkaConsumerProtocolVersion,
 			RackID:          kafkaConsumerRackID,
 		},
-		exporterParallelism,
-		kafkaConsumerEncoding,
-		exporterDeadlockInterval,
+		Parallelism:      exporterParallelism,
+		Encoding:         kafkaConsumerEncoding,
+		DeadlockInterval: exporterDeadlockInterval,
 	}
 
 	consumer, err := builder.CreateConsumer(logger, metrics.NullFactory, exp, options)
