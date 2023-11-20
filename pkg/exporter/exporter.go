@@ -86,7 +86,7 @@ func (e *exporter) WriteSpan(ctx context.Context, span *model.Span) error {
 
 	jaegerSpanKind, _ := span.GetSpanKind()
 	otelSpanKind := metrics.SpanKind_SPAN_KIND_UNSPECIFIED.String()
-	if val, ok := jaegerToOtelSpanKind[jaegerSpanKind]; ok {
+	if val, ok := jaegerToOtelSpanKind[jaegerSpanKind.String()]; ok {
 		otelSpanKind = val
 	}
 
