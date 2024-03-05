@@ -2,7 +2,7 @@
 
 The **Jaeger Exporter** creates the Prometheus metrics for the [Service Performance Monitoring](https://www.jaegertracing.io/docs/1.37/spm/).
 
-The exporter reuses the Jaeger Ingester logic to consume spans from a particular Kafka topic, but instead of writing them to a storage backend it creates the metrics `calls_total` and `duration_milliseconds_bucket` for the Service Performance Monitoring. To use these metrics the `--prometheus.query.normalize-calls` and `--prometheus.query.normalize-duration` flag must be set for Jaeger.
+The exporter reuses the Jaeger Ingester logic to consume spans from a particular Kafka topic, but instead of writing them to a storage backend it creates the metrics `calls_total` and `duration_milliseconds` for the Service Performance Monitoring. To use these metrics the `--prometheus.query.normalize-calls` and `--prometheus.query.normalize-duration` flag must be set for Jaeger.
 
 ![Jaeger UI](./assets/screenshot.png)
 

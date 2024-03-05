@@ -25,13 +25,13 @@ var (
 	callsTotalMetric = promauto.NewCounterVec(prometheus.CounterOpts{
 		Namespace: "",
 		Name:      "calls_total",
-	}, []string{"service_name", "operation", "span_kind", "status_code"})
+	}, []string{"service_name", "span_name", "span_kind", "status_code"})
 
-	durationMillisecondsBucketMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
+	durationMillisecondsMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace: "",
-		Name:      "duration_milliseconds_bucket",
+		Name:      "duration_milliseconds",
 		Buckets:   []float64{0.1, 1, 5, 10, 50, 100, 250, 500, 1000, 5000, 10000},
-	}, []string{"service_name", "operation", "span_kind", "status_code"})
+	}, []string{"service_name", "span_name", "span_kind", "status_code"})
 
 	jaegerToOtelSpanKind = map[string]string{
 		"unspecified": metrics.SpanKind_SPAN_KIND_UNSPECIFIED.String(),
@@ -98,7 +98,7 @@ func (e *exporter) WriteSpan(ctx context.Context, span *model.Span) error {
 	}
 
 	callsTotalMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Inc()
-	durationMillisecondsBucketMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Observe(durationToMillis(span.Duration))
+	durationMillisecondsMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Observe(durationToMillis(span.Duration))
 
 	return nil
 }
