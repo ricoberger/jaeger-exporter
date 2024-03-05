@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: jaeger-exporter
-          image: "ricoberger/jaeger-exporter:v0.4.2"
+          image: "ricoberger/jaeger-exporter:v0.5.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http

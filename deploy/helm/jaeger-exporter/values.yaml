@@ -17,7 +17,7 @@ imagePullSecrets: []
 image:
   repository: ricoberger/jaeger-exporter
   pullPolicy: IfNotPresent
-  tag: v0.4.2
+  tag: v0.5.0
 
 ## Specify additional annotations for the created Pods.
 ##
