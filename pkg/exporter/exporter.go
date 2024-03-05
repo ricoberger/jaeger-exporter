@@ -27,9 +27,9 @@ var (
 		Name:      "calls_total",
 	}, []string{"service_name", "operation", "span_kind", "status_code"})
 
-	latencyMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
+	durationMillisecondsBucketMetric = promauto.NewHistogramVec(prometheus.HistogramOpts{
 		Namespace: "",
-		Name:      "latency",
+		Name:      "duration_milliseconds_bucket",
 		Buckets:   []float64{0.1, 1, 5, 10, 50, 100, 250, 500, 1000, 5000, 10000},
 	}, []string{"service_name", "operation", "span_kind", "status_code"})
 
@@ -98,7 +98,7 @@ func (e *exporter) WriteSpan(ctx context.Context, span *model.Span) error {
 	}
 
 	callsTotalMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Inc()
-	latencyMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Observe(durationToMillis(span.Duration))
+	durationMillisecondsBucketMetric.WithLabelValues(serviceName, operationName, otelSpanKind, statusCode).Observe(durationToMillis(span.Duration))
 
 	return nil
 }
