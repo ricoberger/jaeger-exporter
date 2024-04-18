@@ -48,10 +48,11 @@ var (
 	// kafkaConsumerTLSKey            string
 	// kafkaConsumerTLSServerName     string
 	// kafkaConsumerTLSSkipHostVerify bool
-	kafkaConsumerTopic string
-	logFormat          string
-	logLevel           string
-	showVersion        bool
+	kafkaConsumerTopic                string
+	kafkaConsumerFetchMaxMessageBytes int32
+	logFormat                         string
+	logLevel                          string
+	showVersion                       bool
 )
 
 func init() {
@@ -83,6 +84,7 @@ func init() {
 	// flag.StringVar(&kafkaConsumerTLSServerName, "kafka.consumer.tls.server-name", "", "Override the TLS server name we expect in the certificate of the remote server(s).")
 	// flag.BoolVar(&kafkaConsumerTLSSkipHostVerify, "kafka.consumer.tls.skip-host-verify", false, "(insecure) Skip server's certificate chain and host name verification.")
 	flag.StringVar(&kafkaConsumerTopic, "kafka.consumer.topic", "jaeger-spans", "The name of the kafka topic to consume from.")
+	flag.Int32Var(&kafkaConsumerFetchMaxMessageBytes, "kafka.consumer.fetch-max-message-bytes", 10485760, "The maximum number of message bytes to fetch from the broker in a single request. So you must be sure this is at least as large as your largest message.")
 	flag.StringVar(&logFormat, "log.format", "console", "Set the output format of the logs. Must be \"console\" or \"json\".")
 	flag.StringVar(&logLevel, "log.level", "info", "Set the log level. Must be \"debug\", \"info\", \"warn\", \"error\", \"fatal\" or \"panic\".")
 	flag.BoolVar(&showVersion, "version", false, "Print version information.")
@@ -150,12 +152,13 @@ func main() {
 			// 		Mechanism: kafkaConsumerPlaintextMechanism,
 			// 	},
 			// },
-			Brokers:         strings.Split(kafkaConsumerBrokers, ","),
-			Topic:           kafkaConsumerTopic,
-			GroupID:         kafkaConsumerGroupID,
-			ClientID:        kafkaConsumerClientID,
-			ProtocolVersion: kafkaConsumerProtocolVersion,
-			RackID:          kafkaConsumerRackID,
+			Brokers:              strings.Split(kafkaConsumerBrokers, ","),
+			Topic:                kafkaConsumerTopic,
+			GroupID:              kafkaConsumerGroupID,
+			ClientID:             kafkaConsumerClientID,
+			ProtocolVersion:      kafkaConsumerProtocolVersion,
+			RackID:               kafkaConsumerRackID,
+			FetchMaxMessageBytes: kafkaConsumerFetchMaxMessageBytes,
 		},
 		Parallelism:      exporterParallelism,
 		Encoding:         kafkaConsumerEncoding,
