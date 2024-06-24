@@ -3,7 +3,7 @@ module github.com/ricoberger/jaeger-exporter
 go 1.22
 
 require (
-	github.com/jaegertracing/jaeger v1.58.0
+	github.com/jaegertracing/jaeger v1.58.1
 	github.com/prometheus/client_golang v1.19.1
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.9.0
