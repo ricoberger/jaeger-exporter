@@ -15,9 +15,9 @@ imagePullSecrets: []
 ## Set the image which should be used.
 ##
 image:
-  repository: ricoberger/jaeger-exporter
+  repository: ghcr.io/ricoberger/jaeger-exporter
   pullPolicy: IfNotPresent
-  tag: v0.5.2
+  tag: v0.6.0
 
 ## Specify additional annotations for the created Pods.
 ##
