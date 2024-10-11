@@ -1,34 +1,38 @@
 version: 2
 updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "monthly"
+      interval: monthly
+    reviewers:
+      - ricoberger
     assignees:
-      - "ricoberger"
+      - ricoberger
     groups:
       github-actions:
         patterns:
-          - "*"
-
-  - package-ecosystem: "docker"
-    directory: "/cmd/exporter"
+          - '*'
+  - package-ecosystem: docker
+    directory: /cmd/exporter
     schedule:
-      interval: "monthly"
+      interval: monthly
+    reviewers:
+      - ricoberger
     assignees:
-      - "ricoberger"
+      - ricoberger
     groups:
       docker:
         patterns:
-          - "*"
-
-  - package-ecosystem: "gomod"
-    directory: "/"
+          - '*'
+  - package-ecosystem: gomod
+    directory: /
     schedule:
-      interval: "weekly"
+      interval: weekly
+    reviewers:
+      - ricoberger
     assignees:
-      - "ricoberger"
+      - ricoberger
     groups:
       gomod:
         patterns:
-          - "*"
+          - '*'
