@@ -1,7 +1,8 @@
 module github.com/ricoberger/jaeger-exporter
 
-go 1.22
-toolchain go1.22.5
+go 1.23.0
+
+toolchain go1.23.2
 
 require (
 	github.com/jaegertracing/jaeger v1.62.0
