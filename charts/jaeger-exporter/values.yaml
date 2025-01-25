@@ -1,3 +1,4 @@
+---
 nameOverride: ""
 fullnameOverride: ""
 
@@ -17,7 +18,7 @@ imagePullSecrets: []
 image:
   repository: ghcr.io/ricoberger/jaeger-exporter
   pullPolicy: IfNotPresent
-  tag: v0.6.0
+  tag: ""
 
 ## Specify additional annotations for the created Pods.
 ##
@@ -30,36 +31,36 @@ podLabels: {}
 ## Specify the command line arguments for the exporter.
 ##
 args: []
-  # - --exporter.deadlockInterval=300s
-  # - --kafka.consumer.brokers=kafka-kafka-0.kafka-kafka-brokers.tracing.svc.cluster.local:9092,kafka-kafka-1.kafka-kafka-brokers.tracing.svc.cluster.local:9092,kafka-kafka-2.kafka-kafka-brokers.tracing.svc.cluster.local:9092
-  # - --kafka.consumer.topic=jaeger-spans
-  # - --log.format=json
-  # - --log.level=debug
+# - --exporter.deadlockInterval=300s
+# - --kafka.consumer.brokers=kafka-kafka-0.kafka-kafka-brokers.tracing.svc.cluster.local:9092,kafka-kafka-1.kafka-kafka-brokers.tracing.svc.cluster.local:9092,kafka-kafka-2.kafka-kafka-brokers.tracing.svc.cluster.local:9092
+# - --kafka.consumer.topic=jaeger-spans
+# - --log.format=json
+# - --log.level=debug
 
 ## Specify podDisruptionBudget settings for the jaeger-exporter.
 ## See: https://kubernetes.io/docs/tasks/run-application/configure-pdb/
 ##
 podDisruptionBudget: {}
-  # maxUnavailable: 1
+# maxUnavailable: 1
 
 ## Specify security settings for the created Pods. To set the security settings for the jaeger-exporter Container use
 ## the corresponding "securityContext" field.
 ## See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
 ##
 podSecurityContext: {}
-  # fsGroup: 2000
+# fsGroup: 2000
 
 ## Specify security settings for the jaeger-exporter Container. They override settings made at the Pod level via the
 ## "podSecurityContext" when there is overlap.
 ## See: https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
 ##
 securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
 
 ## We usually recommend not to specify default resources and to leave this as a conscious choice for the user. This
 ## also increases chances charts run on environments with little resources, such as Minikube. If you do want to
@@ -67,12 +68,12 @@ securityContext: {}
 ## 'resources:'.
 ##
 resources: {}
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+# limits:
+#   cpu: 100m
+#   memory: 128Mi
+# requests:
+#   cpu: 100m
+#   memory: 128Mi
 
 ## Specify a map of key-value pairs, to configure livenessProbe.
 ## See: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
@@ -137,28 +138,28 @@ serviceMonitor:
   ## MetricRelabelConfigs to apply to samples before ingestion.
   ##
   metricRelabelings: []
-    # - action: keep
-    #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
-    #   sourceLabels: [__name__]
+  # - action: keep
+  #   regex: 'kube_(daemonset|deployment|pod|namespace|node|statefulset).+'
+  #   sourceLabels: [__name__]
 
   ## RelabelConfigs to apply to samples before scraping. Prometheus Operator automatically adds relabelings for a few
   ## standard Kubernetes fields and replaces original scrape job name with __tmp_prometheus_job_name.
   ##
   relabelings: []
-    # - sourceLabels: [__meta_kubernetes_pod_node_name]
-    #   separator: ;
-    #   regex: ^(.*)$
-    #   targetLabel: nodename
-    #   replacement: $1
-    #   action: replace
+  # - sourceLabels: [__meta_kubernetes_pod_node_name]
+  #   separator: ;
+  #   regex: ^(.*)$
+  #   targetLabel: nodename
+  #   replacement: $1
+  #   action: replace
 
 ## Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
 ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
 ##
 topologySpreadConstraints: []
-  # - maxSkew: 1
-  #   topologyKey: topology.kubernetes.io/zone
-  #   whenUnsatisfiable: DoNotSchedule
-  #   labelSelector:
-  #     matchLabels:
-  #       app.kubernetes.io/name: jaeger-exporter
+# - maxSkew: 1
+#   topologyKey: topology.kubernetes.io/zone
+#   whenUnsatisfiable: DoNotSchedule
+#   labelSelector:
+#     matchLabels:
+#       app.kubernetes.io/name: jaeger-exporter

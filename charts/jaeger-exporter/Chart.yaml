@@ -1,6 +1,7 @@
+---
 apiVersion: v2
 name: jaeger-exporter
 description: The Jaeger Exporter creates the Prometheus metrics for the Service Performance Monitoring.
 type: application
-version: 0.6.0
+version: 1.0.0
 appVersion: v0.6.0
