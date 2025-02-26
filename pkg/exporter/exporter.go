@@ -8,7 +8,6 @@ import (
 
 	"github.com/jaegertracing/jaeger/model"
 	"github.com/jaegertracing/jaeger/proto-gen/api_v2/metrics"
-	"github.com/jaegertracing/jaeger/storage/spanstore"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -44,9 +43,9 @@ var (
 )
 
 type Exporter interface {
-	spanstore.Writer
 	Start()
 	Stop() error
+	WriteSpan(ctx context.Context, span *model.Span) error
 }
 
 type exporter struct {
