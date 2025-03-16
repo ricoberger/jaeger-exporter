@@ -1,14 +1,20 @@
 # Jaeger Exporter
 
-The **Jaeger Exporter** creates the Prometheus metrics for the [Service Performance Monitoring](https://www.jaegertracing.io/docs/1.37/spm/).
+The **Jaeger Exporter** creates the Prometheus metrics for the
+[Service Performance Monitoring](https://www.jaegertracing.io/docs/1.37/spm/).
 
-The exporter reuses the Jaeger Ingester logic to consume spans from a particular Kafka topic, but instead of writing them to a storage backend it creates the metrics `calls_total` and `duration_milliseconds` for the Service Performance Monitoring. To use these metrics the `--prometheus.query.normalize-calls` and `--prometheus.query.normalize-duration` flag must be set for Jaeger.
+The exporter reuses the Jaeger Ingester logic to consume spans from a particular
+Kafka topic, but instead of writing them to a storage backend it creates the
+metrics `calls_total` and `duration_milliseconds` for the Service Performance
+Monitoring. To use these metrics the `--prometheus.query.normalize-calls` and
+`--prometheus.query.normalize-duration` flag must be set for Jaeger.
 
 ![Jaeger UI](./assets/screenshot.png)
 
 ## Installation
 
-The Jaeger Exporter can be installed via [Helm](https://helm.sh/) or [Kustomize](https://kustomize.io).
+The Jaeger Exporter can be installed via [Helm](https://helm.sh/) or
+[Kustomize](https://kustomize.io).
 
 To install the exporter via Helm you can use the following commands:
 
@@ -16,16 +22,10 @@ To install the exporter via Helm you can use the following commands:
 helm upgrade --install jaeger-exporter oci://ghcr.io/ricoberger/charts/jaeger-exporter --version 1.0.0
 ```
 
-To install the exporter via Kustomize you can use the following commands:
-
-```sh
-kubectl create namespace tracing
-kustomize build github.com/ricoberger/jaeger-exporter/deploy/kustomize | kubectl apply -n tracing -f -
-```
-
 ## Configuration
 
-The Jaeger Exporter can be configured via command line flags. The following flags are available:
+The Jaeger Exporter can be configured via command line flags. The following
+flags are available:
 
 ```
 --exporter.address string                  The address where the exporter is listen on. (default ":8080")
