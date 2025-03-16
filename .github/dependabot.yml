@@ -8,10 +8,13 @@ updates:
       - ricoberger
     assignees:
       - ricoberger
+    labels:
+      - "changelog: changed"
     groups:
       github-actions:
         patterns:
-          - '*'
+          - "*"
+
   - package-ecosystem: docker
     directory: /cmd/exporter
     schedule:
@@ -20,10 +23,13 @@ updates:
       - ricoberger
     assignees:
       - ricoberger
+    labels:
+      - "changelog: changed"
     groups:
       docker:
         patterns:
-          - '*'
+          - "*"
+
   - package-ecosystem: gomod
     directory: /
     schedule:
@@ -32,7 +38,9 @@ updates:
       - ricoberger
     assignees:
       - ricoberger
+    labels:
+      - "changelog: changed"
     groups:
       gomod:
         patterns:
-          - '*'
+          - "*"
