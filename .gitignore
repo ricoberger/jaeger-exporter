@@ -1,2 +1,6 @@
 # binaries
 /bin
+
+.vscode/*
+
+coverage.out

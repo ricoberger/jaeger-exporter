@@ -2,6 +2,7 @@ package exporter
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -79,6 +80,12 @@ func (e *exporter) WriteSpan(ctx context.Context, span *model.Span) error {
 	serviceName := span.Process.GetServiceName()
 	operationName := span.GetOperationName()
 
+	if len(operationName) > 200 {
+		msg := "Span operation name too long, skipping metrics"
+		e.logger.Warn(msg, zap.String("operationName", operationName))
+		return fmt.Errorf("%s: %s", msg, operationName)
+	}
+
 	if e.services != nil && !slices.Contains(e.services, serviceName) {
 		return nil
 	}
@@ -116,8 +123,9 @@ func New(logger *zap.Logger, address, services string) (Exporter, error) {
 
 	return &exporter{
 		server: &http.Server{
-			Addr:    address,
-			Handler: router,
+			Addr:              address,
+			Handler:           router,
+			ReadHeaderTimeout: 5 * time.Second,
 		},
 		logger:   logger,
 		services: servicesSlice,
