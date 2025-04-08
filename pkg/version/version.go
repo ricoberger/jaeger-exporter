@@ -42,7 +42,9 @@ func Print(program string) (string, error) {
 
 	var buf bytes.Buffer
 	tmpl := template.Must(template.New("version").Parse(versionInfoTmpl))
-	tmpl.ExecuteTemplate(&buf, "version", data)
+	if err := tmpl.ExecuteTemplate(&buf, "version", data); err != nil {
+		return "", err
+	}
 
 	return strings.TrimSpace(buf.String()), nil
 }
