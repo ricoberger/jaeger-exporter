@@ -10,10 +10,7 @@ func New(level, format string) (*zap.Logger, error) {
 	zapEncoderCfg.TimeKey = "timestamp"
 	zapEncoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 
-	isDevelopment := false
-	if level == "debug" {
-		isDevelopment = true
-	}
+	isDevelopment := level == "debug"
 
 	zapConfig := zap.Config{
 		Level:            parseLevel(level),
