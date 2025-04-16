@@ -22,10 +22,6 @@ jobs:
 
       - name: Lint
         uses: golangci/golangci-lint-action@v7
-        with:
-          version: latest
-          working-directory: ./
-          args: --timeout 10m
 
       - name: Download Dependencies
         run: |
@@ -37,7 +33,8 @@ jobs:
       - name: Build
         run: make build
 
-  docker-build:
+  docker:
+    name: Docker
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
