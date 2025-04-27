@@ -1,7 +1,13 @@
+---
 name: Continuous Integration
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   go:
@@ -23,15 +29,13 @@ jobs:
       - name: Lint
         uses: golangci/golangci-lint-action@v7
 
-      - name: Download Dependencies
-        run: |
-          go mod download
-
       - name: Test
-        run: make test
+        run: |
+          make test
 
       - name: Build
-        run: make build
+        run: |
+          make build
 
   docker:
     name: Docker
