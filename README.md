@@ -19,7 +19,7 @@ The Jaeger Exporter can be installed via [Helm](https://helm.sh/) or
 To install the exporter via Helm you can use the following commands:
 
 ```sh
-helm upgrade --install jaeger-exporter oci://ghcr.io/ricoberger/charts/jaeger-exporter --version 1.0.0
+helm upgrade --install jaeger-exporter oci://ghcr.io/ricoberger/charts/jaeger-exporter --version <VERSION>
 ```
 
 ## Configuration
