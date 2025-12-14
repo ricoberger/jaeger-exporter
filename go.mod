@@ -1,6 +1,6 @@
 module github.com/ricoberger/jaeger-exporter
 
-go 1.24.0
+go 1.25.5
 
 require (
 	github.com/jaegertracing/jaeger v1.67.0
