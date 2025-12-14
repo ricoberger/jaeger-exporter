@@ -5,7 +5,7 @@ RUN go mod download
 COPY . .
 RUN export CGO_ENABLED=0 && make build
 
-FROM alpine:3.22.2
+FROM alpine:3.23.0
 RUN apk update && apk add --no-cache ca-certificates
 RUN mkdir /exporter
 COPY --from=build /exporter/bin/exporter /exporter
