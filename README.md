@@ -1,5 +1,14 @@
 # Jaeger Exporter
 
+> [!CAUTION]
+>
+> The Jaeger Exporter is deprecated and will not receive any further updates.
+> Please consider using the
+> [OpenTelemetry Collector](https://opentelemetry.io/docs/collector/) together
+> with the
+> [Span Metrics Connector](https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/spanmetricsconnector/README.md)
+> for creating span metrics.
+
 The **Jaeger Exporter** creates the Prometheus metrics for the
 [Service Performance Monitoring](https://www.jaegertracing.io/docs/1.37/spm/).
 
